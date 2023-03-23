@@ -1,24 +1,35 @@
 <?php include("conn.php");
+     if(isset($_GET["id"])){
 
-// check insset value
-if(isset($_GET["id"])){
-    // echo "id connected";
+        //make varrible
+        $id = $_GET["id"];
+        // echo $id;
 
-// make varrible
-$id = $_GET["id"];
+        // make sql command 
+        $sql= "SELECT * FROM tasks WHERE id ='$id'";
+        
+        // make query
+        $query = mysqli_query($conn, $sql);
+        // print_r ($query);
 
-// update data
-$sql = "UPDATE  tasks SET id='$id'";
+        // fetch as associative array
+        $results = mysqli_fetch_assoc($query);
+        // print_r($result);
 
-// make query
-// $update = mysqli_query($conn, $sql);
-}
+        // loop through the array
+        if($results){
+           foreach ($results as $result) {
+            echo $result."<br>";
+           }
+        }
+     }
 
-// free result
-// mysqli_free_result($update);
+     if(isset($_POST["send"])){
+        echo "connectd succesful";
 
-// free connection
-// mysqli_close($conn);
+     }else{
+        echo "connection error";
+     }
 
 
 
@@ -60,7 +71,7 @@ $sql = "UPDATE  tasks SET id='$id'";
             </center>
 
             <div class="col-md-12 col-md-offest-1">
-                <butoon type="button" class="btn btn-primary">Update Task</butoon>
+                <butoon type="button" class="btn btn-primary" name="update">Update Task</butoon>
                 <butoon type="button" class="btn btn-secondary float-right default">Print</butoon>
                 <br><br>
             </div>
@@ -68,7 +79,8 @@ $sql = "UPDATE  tasks SET id='$id'";
             <form method="POST" action="update.php">
                 <div class="form-group">
                     <labe>TASK NAME</labe>
-                    <input type="text" required name="task" class="form-control"> <br>
+                    <input type="text" required name="editTask" class="form-control" value="<?php echo (htmlspecialchars($result["_name"])) ?>"> <br>
+                    <!-- Submit Btn -->
                     <input type="submit" name="send" value="Add Task" class="btn btn-success">
                 </div>
             </form>

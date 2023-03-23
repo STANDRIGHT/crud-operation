@@ -17,7 +17,7 @@ $tasks = mysqli_fetch_alL($result, MYSQLI_ASSOC);
 mysqli_free_result($result);
 
 // free connection
-mysqli_close($conn);
+// mysqli_close($conn);
 
 
 
@@ -117,11 +117,11 @@ mysqli_close($conn);
                 <?php foreach ($tasks as $task)  :?>
                 <tbody>
                     <tr>
-                        <td><?php echo  htmlspecialchars($task["id"]); ?></td>
+                        <td><?php echo  mysqli_real_escape_string($conn, $task["id"]); ?></td>
                         <td class="col-md-10"><?php echo htmlspecialchars($task["_name"]); ?></td>
                         <td class="col-md-10"><?php echo htmlspecialchars($task["_taskType"]); ?></td>
-                        <td><a href="update.php?id=<?php echo (htmlspecialchars($task["id"])); ?>" class="btn btn-success">Edit</a></td>
-                        <td><a href="delete.php?id=<?php echo(htmlspecialchars($task["id"])); ?>" class="btn btn-danger">Delete</a></td>
+                        <td><a href="update.php?id=<?php echo (mysqli_real_escape_string($conn, $task["id"])); ?>" class="btn btn-success">Edit</a></td>
+                        <td><a href="delete.php?id=<?php echo (mysqli_real_escape_string($conn, $task["id"])); ?>" class="btn btn-danger">Delete</a></td>
                     </tr>
                 </tbody>
                 <?php endforeach ; ?>
