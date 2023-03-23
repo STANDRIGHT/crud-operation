@@ -1,0 +1,10 @@
+*{
+    padding:0;
+    margin:0;
+
+}
+
+.wrapper{
+    width: calc(100% - 400px);
+    margin:0 auto;
+}
