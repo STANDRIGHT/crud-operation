@@ -55,17 +55,17 @@ mysqli_free_result($result);
     <div class="wrapper">
         <div class="row" style="margin-top:50px;">
             <center>
-                <h1>php CRUD</h1>
+                <h1>php CRUD operation</h1>
             </center>
 
             <div class="col-md-12 col-md-offest-1">
                 <butoon type="button" class="btn btn-primary" data-target="#myModal" data-toggle="modal">Add Task
                 </butoon>
-                <butoon type="button" class="btn btn-secondary float-right default">Print</butoon>
+                <butoon type="button" class="btn btn-secondary float-right default" onclick="print()" >Print</butoon>
                 <br><br>
             </div>
 
-            <table class="table">
+            <table class="table table-hover table-bordered">
 
 
                 <!-- The Modal -->
@@ -104,7 +104,7 @@ mysqli_free_result($result);
 
                 </div>
 
-                <thead>
+                <thead class="table-dark">
                     <tr>
                         <th>ID</th>
                         <th>TASK</th>

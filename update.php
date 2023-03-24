@@ -14,23 +14,28 @@
 
         // fetch as associative array
         $results = mysqli_fetch_assoc($query);
-        // print_r($result);
+        // var_dump($results);
 
-        // loop through the array
-        if($results){
-           foreach ($results as $result) {
-            echo $result."<br>";
-           }
-        }
-     }
+}
 
-     if(isset($_POST["send"])){
-        echo "connectd succesful";
 
-     }else{
-        echo "connection error";
-     }
+    //  creating Update task
+    if (isset($_POST["send"])) {
+        # code...
+        $update = $_POST["editTask"];
+        $type = $_POST["taskType"];
 
+        // make sql
+        $sql = "UPDATE tasks SET _name ='$update', _taskType='$type' WHERE id= '$id'";
+
+        // make query
+        $queryUpdate = mysqli_query($conn, $sql);
+        print_r($queryUpdate);
+        // var_dump($queryUpdate);
+
+        // redirect to index page
+        header("location:index.php");
+    }
 
 
 
@@ -71,17 +76,22 @@
             </center>
 
             <div class="col-md-12 col-md-offest-1">
-                <butoon type="button" class="btn btn-primary" name="update">Update Task</butoon>
-                <butoon type="button" class="btn btn-secondary float-right default">Print</butoon>
+                <a href="index.php" type="button" class="btn btn-danger" name="update">Back</a>
+                <butoon type="button" class="btn btn-secondary float-right default" onclick="print()" >Print</butoon>
                 <br><br>
             </div>
 
-            <form method="POST" action="update.php">
+            <form method="POST" >
                 <div class="form-group">
                     <labe>TASK NAME</labe>
-                    <input type="text" required name="editTask" class="form-control" value="<?php echo (htmlspecialchars($result["_name"])) ?>"> <br>
+                    <input type="text" required name="editTask" class="form-control" 
+                    value="<?php echo (mysqli_real_escape_string($conn, $results["_name"])) ?>"> <br> 
+                    
+                    <input type="text" required name="taskType" class="form-control" 
+                    value="<?php echo (mysqli_real_escape_string($conn, $results["_taskType"])) ?>"> <br>
+                    
                     <!-- Submit Btn -->
-                    <input type="submit" name="send" value="Add Task" class="btn btn-success">
+                    <input type="submit" name="send" value="Update" class="btn btn-success">
                 </div>
             </form>
         </div>
